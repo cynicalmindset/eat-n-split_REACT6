@@ -1,3 +1,6 @@
+import { fireEvent } from "@testing-library/dom";
+import { div } from "motion/react-client";
+
 const initialFriends = [
   {
     id: 118836,
@@ -18,3 +21,61 @@ const initialFriends = [
     balance: 0,
   },
 ];
+
+export default function App() {
+  return (
+    <div className="app">
+      <div className="sidebar">
+        <Friends />
+        <Formaddfriend />
+        <button className="button">Add friend</button>
+      </div>
+    </div>
+  );
+}
+
+function Friends() {
+  const friends = initialFriends;
+  return (
+    <ul>
+      {friends.map((friend) => (
+        <Friend friend={friend} key={friend.id} />
+      ))}
+    </ul>
+  );
+}
+
+function Friend({ friend }) {
+  return (
+    <li>
+      <img src={friend.image} alt={friend.name} />
+      <h3>{friend.name}</h3>
+
+      {friend.balance < 0 && (
+        <p className="red">
+          you owe {friend.name} {Math.abs(friend.balance)}$
+        </p>
+      )}
+      {friend.balance > 0 && (
+        <p className="green">
+          {friend.name} ownes you {Math.abs(friend.balance)}$
+        </p>
+      )}
+      {friend.balance === 0 && <p>you and {friend.name} are good gang</p>}
+
+      <button className="button">Select</button>
+    </li>
+  );
+}
+
+function Formaddfriend() {
+  return (
+    <form className="form-add-friend">
+      <label>😘 Friend Name</label>
+      <input type="text"></input>
+      <label>Image URL</label>
+      <input type="text"></input>
+      <button className="button">ADD THIS GUY</button>
+    </form>
+  );
+}

@@ -30,6 +30,7 @@ export default function App() {
         <Formaddfriend />
         <button className="button">Add friend</button>
       </div>
+      <Formsplit />
     </div>
   );
 }
@@ -76,6 +77,26 @@ function Formaddfriend() {
       <label>Image URL</label>
       <input type="text"></input>
       <button className="button">ADD THIS GUY</button>
+    </form>
+  );
+}
+
+function Formsplit() {
+  return (
+    <form className="form-split-bill">
+      <h2>Split the Bill with X</h2>
+      <label>😶 Bill value</label>
+      <input type="text"></input>
+      <label>😭 your expense</label>
+      <input type="text"></input>
+      <label>😍 x expense</label>
+      <input type="text" disabled></input>
+      <label>🤑 who is paying the bill</label>
+      <select>
+        <option value="user">You</option>
+        <option value="friend">X</option>
+      </select>
+      <button className="button">split this nigga</button>
     </form>
   );
 }

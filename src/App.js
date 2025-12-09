@@ -1,5 +1,6 @@
 import { fireEvent } from "@testing-library/dom";
 import { div } from "motion/react-client";
+import { useState } from "react";
 
 const initialFriends = [
   {
@@ -23,12 +24,20 @@ const initialFriends = [
 ];
 
 export default function App() {
+  const [showfriends, setshowfirends] = useState(false);
+
+  function handelshowfriends() {
+    setshowfirends((cur) => !cur);
+  }
+
   return (
     <div className="app">
       <div className="sidebar">
         <Friends />
-        <Formaddfriend />
-        <button className="button">Add friend</button>
+        {showfriends && <Formaddfriend onAddClick={handelshowfriends} />}
+        <button className="button" onClick={handelshowfriends}>
+          Add friend
+        </button>
       </div>
       <Formsplit />
     </div>
@@ -69,14 +78,16 @@ function Friend({ friend }) {
   );
 }
 
-function Formaddfriend() {
+function Formaddfriend({ onAddClick }) {
   return (
     <form className="form-add-friend">
       <label>😘 Friend Name</label>
       <input type="text"></input>
       <label>Image URL</label>
       <input type="text"></input>
-      <button className="button">ADD THIS GUY</button>
+      <button className="button" onClick={onAddClick}>
+        ADD THIS GUY
+      </button>
     </form>
   );
 }
